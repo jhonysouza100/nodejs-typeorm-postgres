@@ -1,15 +1,22 @@
 import { DataSource } from 'typeorm'
 import config from '../config'
 
-const AppDataSourde = new DataSource({
+const AppDataSource = new DataSource({
   type: 'postgres',
-  host: config.DB.URI,
-  username: config.DB.USER,
-  password: config.DB.PASS,
+  host: config.DB.URI as string,
   port: config.DB.PORT as number,
-  database: 'typeormdb',
+  username: config.DB.USER as string,
+  password: config.DB.PASS as string,
+  database: 'postgres',
+  synchronize: true,
+  logging: true,
   entities: [],
-  logging: true
+  subscribers: [],
+  migrations: [],
 })
 
-export { AppDataSourde }
+async function connect() {
+  await AppDataSource.initialize();
+}
+
+export { connect }

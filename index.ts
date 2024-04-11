@@ -1,12 +1,12 @@
 import app from './app'
-import { AppDataSourde } from './connection'
+import { connect } from './connection'
 
 async function main() {
   
   try {
 
     // database connection
-    await AppDataSourde.initialize()
+    await connect()
   
     // server listening
     app.listen(app.get('port'), () => console.log(`Server listen on port: ${app.get('port')}`))
