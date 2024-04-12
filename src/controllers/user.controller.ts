@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { User } from "../entities/User";
+import { Request, Response } from "express"
+import { User } from "../entities/User"
 
 const createUser = async (req: Request, res: Response) => {
 
@@ -43,18 +43,37 @@ const updateUser = async (req: Request, res: Response) => {
     const {firstname, lastname} = req.body
 
     const user = await User.findOneBy({id: parseInt(req.params.id )})
-
+    
     if(!user) throw new Error('USER_NOT_FOUND');
-
+    
     user.firstname = firstname
     user.lastname = lastname
     user.save()
-
+    
     // await User.update( 
     //   {id: parseInt(req.params.id)},
     //   {firstname: req.body.firstname, lastname: req.body.lastname}
     // )
-
+      
+      return res.status(204).json({"success": true})
+      
+    } catch (error) {
+      if(error instanceof Error) return res.status(400).json({
+        error: error.message
+      })
+    }
+  }
+  
+const deleteUser = async (req: Request, res: Response) => {
+  
+  try {
+    
+    const user = await User.findOneBy({id: parseInt(req.params.id )})
+    
+    if(!user) throw new Error('USER_NOT_FOUND');
+    
+    user.remove()
+    
     return res.status(204).json({"success": true})
     
   } catch (error) {
@@ -64,4 +83,4 @@ const updateUser = async (req: Request, res: Response) => {
   }
 }
 
-export { createUser, getUsers, updateUser }
+export { createUser, getUsers, updateUser, deleteUser }
