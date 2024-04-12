@@ -2,6 +2,29 @@
 
 TypeORM es un modulo de Typescript para Nodejs, el cual permite crear tu base de datos a través de código, es decir, en lugar de estar escribiendo sintaxis SQL para Postgres u otra base de datos SQL, puedes llamar una función y este modulo lo traduce en SQL para la base de datos que hayas configurado. Además este modulo usa conceptos de Typescript como decoradores, Herencia, y se adapta a múltiples bases de datos. En este ejemplo crea una REST API que realiza las operaciones CRUD (CREATE, READ, UPDATE, DELETE).
 
+### HTTP Request
+
+* GET
+```php
+http://localhost:3000/api/user/get
+```
+* POST
+```php
+http://localhost:3000/api/user/create
+
+json body { "firstname": "John", "lastname": "salchichon" }
+```
+* PUT
+```php
+http://localhost:3000/api/user/update/1
+
+json body { "firstname": "John", "lastname": "doe" }
+```
+* DELETE
+```php
+http://localhost:3000/api/user/delete/1
+```
+
 
 ## Project setup
 
